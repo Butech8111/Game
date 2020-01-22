@@ -1,50 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace tree
+namespace TreeExample
 {
-    class Program
+    class Tree
     {
-        static void Main()
+        private Node Root;
+        public Tree()
         {
-
+            Root = null;
         }
-        class Tree
+        public void Add(int newValue)
         {
-            public class Node
+            if (Root == null)
             {
-                private int value;
-                public Node Left { get; private set; }
-                public Node Right { get; private set; }
-                public Node(int value)
-                {
-                    this.value = value;
-                    Left = null;
-                    Right = null;
-                }
-                public void Add(int newValue)
-                {
-                    if (value >= newValue)
-                    {
-                        if (Left == null) Left = new Node(newValue);
-                        else Left.Add(newValue);
-                    }
-                    else
-                    {
-                        if (Right == null) Right = new Node(newValue);
-                        else Right.Add(newValue);
-                    }
-                }
-                public List<int> GetList(List<int> answer)
-                {
-                    Left?.GetList(answer);
-                    answer.Add(value);
-                    Right?.GetList(answer);
-                    return answer;
-                }
-                public override String ToString() => string.Join(", ", GetList(new List<int>()));
-
+                Root = new Node(newValue);
+            }
+            else
+            {
+                Root.Add(newValue);
             }
         }
+        public override string ToString() => Root == null ? "No tree" : Root.ToString();
     }
 }
